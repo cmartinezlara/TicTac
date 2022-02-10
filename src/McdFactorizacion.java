@@ -43,8 +43,8 @@ public class McdFactorizacion {
     }
 
     public static void main (String[] args) throws Exception {
-        BigInteger n1 = new BigInteger("180");
-        BigInteger n2 = new BigInteger("324");
+        BigInteger n1 = new BigInteger("742462");
+        BigInteger n2 = new BigInteger("64");
         Map<BigInteger, BigInteger> factores1 = getFactores(n1);
         Map<BigInteger, BigInteger> factores2 = getFactores(n2);
         
