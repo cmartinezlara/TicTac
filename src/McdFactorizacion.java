@@ -54,13 +54,12 @@ public class McdFactorizacion {
         }
         boolean encontro_divisores = false;
         BigInteger i = new BigInteger("2");
-        BigInteger dos = new BigInteger("2");
         while (i.compareTo(n.sqrt()) <= 0) {
             if (n.mod(i).compareTo(BigInteger.ZERO) == 0) {
                 encontro_divisores = true;
                 break;
             }
-            i = i.add(BigInteger.ONE);
+            i = siguiente_primo(i);
         }
         return !encontro_divisores;
     }
@@ -82,6 +81,8 @@ public class McdFactorizacion {
     }
 
     public static void main(String[] args) { //o(n3)
+        long t1 = System.nanoTime();
+
         BigInteger n1 = new BigInteger("78580140");
         BigInteger n2 = new BigInteger("22182054");
         Map<BigInteger, BigInteger> factores1 = getFactores(n1); //o(n3)
@@ -103,6 +104,7 @@ public class McdFactorizacion {
                 }
             }
         }
+        System.out.println(System.nanoTime() - t1);
         System.out.println("El MCD de " + n1 + " y " + n2 + " es: " + mcd);
     }
 
