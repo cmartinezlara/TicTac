@@ -3,12 +3,12 @@ import java.math.*;
 import java.util.Random;
 
 public class Euclides {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException { //o(n2)
 		String sFichero = "C:\\Users\\aleja\\OneDrive\\Uni\\TAC\\Pruebas2.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
 	    
 		int l = 1;
-		while (l < 500) {
+		while (l < 500) { //o(n2)
 			Random r1 = new Random();
 			Random r2 = new Random();
 			BigInteger mayor = new BigInteger(l, r1);
@@ -21,7 +21,7 @@ public class Euclides {
 			}
 			
 			long t1 = System.currentTimeMillis();
-			BigInteger mcd = euclides(mayor, menor);
+			BigInteger mcd = euclides(mayor, menor); //o(n)
 			long t2 = System.currentTimeMillis();
 			long tiempo = t2 - t1;
 			System.out.println("El MCD de " + mayor + " y " + menor + " es: " + mcd);
@@ -33,7 +33,7 @@ public class Euclides {
 		bw.close();
 	}
 	
-	public static BigInteger euclides (BigInteger mayor, BigInteger menor) {
+	public static BigInteger euclides (BigInteger mayor, BigInteger menor) {//o(n)
 		BigInteger zero = new BigInteger("0");
 		if (menor.compareTo(zero) == 0) {
 			return mayor;
