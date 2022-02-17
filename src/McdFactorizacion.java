@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -81,12 +83,20 @@ public class McdFactorizacion {
         return primos1;
     }
 
-    public static void main(String[] args) {
-        BigInteger n1 = new BigInteger("78580140");
-        BigInteger n2 = new BigInteger("22182054");
+    public static void main(String[] args) throws Exception {
+        //String sFichero = "C:\\Users\\aleja\\OneDrive\\Uni\\TAC\\Pruebas1.txt";
+        //BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
+
+        int l = 10;
+        //while (l < 500) {
+        Random r1 = new Random();
+        Random r2 = new Random();
+        BigInteger n1 = new BigInteger(l, r1);
+        BigInteger n2 = new BigInteger(l, r2);
         Map<BigInteger, BigInteger> factores1 = getFactores(n1);
         Map<BigInteger, BigInteger> factores2 = getFactores(n2);
 
+        long t1 = System.nanoTime();
         BigInteger mcd = BigInteger.ONE;
         for (BigInteger key1 : factores1.keySet()) {
             while (factores1.containsKey(key1) && factores2.containsKey(key1)) {
@@ -103,7 +113,15 @@ public class McdFactorizacion {
                 }
             }
         }
+        long t2 = System.nanoTime();
+        long tiempo = t2 - t1;
         System.out.println("El MCD de " + n1 + " y " + n2 + " es: " + mcd);
+        System.out.println("Tiempo = " + tiempo);
+        l += 1;
+
+        //bw.write(n1 + ";" + n2 + ";" + tiempo + "\n");
+        //}
+        //bw.close();
     }
 
 }
