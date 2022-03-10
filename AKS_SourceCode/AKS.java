@@ -69,7 +69,7 @@ public class AKS extends Thread
 	{
 		System.out.println(n);
 		bw.write(n+";");
-		boolean salir = true;
+		//boolean salir = true;
 		//-----PASO 1-----
 		// TODO: Do this in linear time http://www.ams.org/journals/mcom/1998-67-223/S0025-5718-98-00952-1/S0025-5718-98-00952-1.pdf
 		// If ( n = a^b for a in natural numbers and b > 1), output COMPOSITE
@@ -97,8 +97,6 @@ public class AKS extends Thread
 				if (verbose) System.out.println(n + " is a perfect power of " + base);
 				factor = base;
 				n_isprime = false;
-				long tf = System.nanoTime() - t1;
-		        bw.write(tf+"\n");
 				return n_isprime;
 			}
 			
@@ -109,15 +107,12 @@ public class AKS extends Thread
 		}
 		while (aSquared.compareTo(this.n) <= 0);
 		if (verbose) System.out.println(n + " is not a perfect power of any integer less than its square root");
-		long tf = System.nanoTime() - t1;
-        bw.write(tf+";");
         
 		//-----PASO 2-----
 		// Find the smallest r such that o_r(n) > log^2 n
 		// o_r(n) is the multiplicative order of n modulo r
 		// the multiplicative order of n modulo r is the 
 		// smallest positive integer k with	n^k = 1 (mod r).
-		t1 = System.nanoTime();
 		double log = this.log();
 		double logSquared = log*log;
 		BigInteger k = BigInteger.ONE;
@@ -130,13 +125,9 @@ public class AKS extends Thread
 		}
 		while( k.doubleValue() < logSquared );
 		if (verbose) System.out.println("r is " + r);
-		tf = System.nanoTime() - t1;
-        bw.write(tf+";");
-
 		
 		//-----PASO 3-----
 		// If 1 < gcd(a,n) < n for some a <= r, output COMPOSITE
-		t1 = System.nanoTime();
 		for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) )
 		{
 			BigInteger gcd = n.gcd(i);
@@ -145,17 +136,13 @@ public class AKS extends Thread
 			{
 				factor = i;
 				n_isprime = false;
-				tf = System.nanoTime() - t1;
-		        bw.write(tf+"\n");
 				return false;
 			}
 		}
-		tf = System.nanoTime() - t1;
-        bw.write(tf+"\n");
 		
-		if (salir) return true; //CORTE PARA LAS PRUEBAS
+		//if (salir) return true; //CORTE PARA LAS PRUEBAS
 		
-		//-----PASO 4----
+		//-----PASO 4-----
 		// If n <= r, output PRIME
 		if( n.compareTo(r) <= 0 )
 		{
@@ -163,10 +150,10 @@ public class AKS extends Thread
 			return true;
 		}
 
-		
+		//-----PASO 5-----
 		// For i = 1 to sqrt(totient)log(n) do
 		// if (X+i)^n <> X^n + i (mod X^r - 1,n), output composite;
-
+		long t2 = System.nanoTime();
 		// sqrt(totient)log(n)
 		int limit = (int) (Math.sqrt(totient(r).doubleValue()) * this.log());
 		// X^r - 1
@@ -191,7 +178,11 @@ public class AKS extends Thread
 			else
 				if (verbose) System.out.println("(x+" + i + ")^" + n + " = x^" + n + " + " + i + " mod (x^" + r + " - 1, " + n + ") true");
 		}
-		
+		long t_5 = System.nanoTime() - t2;
+        bw.write(t_5+";");
+
+		long tf = System.nanoTime() - t1;
+        bw.write(tf+"\n");
 		n_isprime = true;
 	    return n_isprime;
 	}
@@ -244,6 +235,7 @@ public class AKS extends Thread
 		{
 			k = k.add(BigInteger.ONE);
 			result = this.n.modPow(k,r);
+			//System.out.println("k: " + k + " r: " + r);
 		}
 		while( result.compareTo(BigInteger.ONE) != 0 && r.compareTo(k) > 0);
 		

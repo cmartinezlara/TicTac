@@ -32,17 +32,18 @@ public class Main {
       //java.io.BufferedReader stdin = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
       //System.out.println("Type a new number:");
       //String line = stdin.readLine();
-      String sFichero = "C:\\Users\\aleja\\OneDrive\\Uni\\TAC\\Práctica 1\\PruebasPrimos.csv";
+      String sFichero = "C:\\Users\\aleja\\OneDrive\\Uni\\TAC\\Práctica 1\\Borrar.csv";
 	  BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
-	  for (int j = 0; j < 50; j++) {
+	  for (int j = 0; j < 5; j++) {
 	      Random r = new Random();
 	      int l = 2;
-	      while(l <= 56/*line != null*/)
+	      while(l <= 31 /*line != null*/)
 	      {
 	        //Interface.verbose = false;
 	    	BigInteger n = BigInteger.probablePrime(l, r);
+	    	//BigInteger n = new BigInteger("9");
 	        Interface i = new Interface(n, cert);
-	        System.out.print(l + ": ");
+	        System.out.print((j+1) + "-" + (l-1) + ": ");
 	        
 	        // System.out.println((i.isPrime() ? "1" : "0"));
 	        System.out.println((i.isPrime(bw) ? "1 - PRIME" : "0 - NOT PRIME"));
@@ -51,8 +52,8 @@ public class Main {
 	        //line = stdin.readLine();
 	        l++;
 	      }
-	      bw.close();
 	    }
+	  bw.close();
     }
     catch(Exception e)
     {
