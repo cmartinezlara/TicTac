@@ -201,23 +201,23 @@ public class AKS extends Thread
 	 * @param r BigInteger to calculate the totient of
 	 * @return phi(r)--number of integers less than r that are coprime
 	 */
-    BigInteger totient(BigInteger n) 
+    BigInteger totient(BigInteger n) // 9 + (floor(raiz(n)) - 1) * (11 + 5n/2 )
     { 
-    	BigInteger result = n; 
+    	BigInteger result = n; //1
       
-    	for( BigInteger i = BigInteger.valueOf(2); n.compareTo(i.multiply(i)) > 0; i = i.add(BigInteger.ONE) ) 
+    	for( BigInteger i = BigInteger.valueOf(2); n.compareTo(i.multiply(i)) > 0; i = i.add(BigInteger.ONE) ) //2 + (floor(raiz(n)) - 1) * (11 + 5n/2 )
     	{ 
-    		if (n.mod(i).compareTo(BigInteger.ZERO) == 0) 
-    			result = result.subtract(result.divide(i));
+    		if (n.mod(i).compareTo(BigInteger.ZERO) == 0) // 3 + 3 = 6
+    			result = result.subtract(result.divide(i));// 3
     		
-    		while (n.mod(i).compareTo(BigInteger.ZERO) == 0)
-    			n = n.divide(i); 
+    		while (n.mod(i).compareTo(BigInteger.ZERO) == 0) //3 + (n/2)*(5)
+    			n = n.divide(i); //2 
     	}
     	
-    	if (n.compareTo(BigInteger.ONE) > 0) 
-    		result = result.subtract(result.divide(n));
+    	if (n.compareTo(BigInteger.ONE) > 0) // 2 + 3 = 5
+    		result = result.subtract(result.divide(n));// 3
     	
-    	return result;
+    	return result; // 1
     	
     } 
 

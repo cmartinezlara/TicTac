@@ -32,7 +32,7 @@ public class Main {
       //java.io.BufferedReader stdin = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
       //System.out.println("Type a new number:");
       //String line = stdin.readLine();
-      String sFichero = "C:\\Users\\aleja\\OneDrive\\Uni\\TAC\\Práctica 1\\Borrar.csv";
+      String sFichero = "C:\\Users\\Manu\\Desktop\\Uni\\TIC TAC\\pruebas.csv";
 	  BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
 	  for (int j = 0; j < 5; j++) {
 	      Random r = new Random();
